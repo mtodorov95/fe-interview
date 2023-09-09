@@ -1,14 +1,14 @@
 <script setup lang="ts">
-import { useStore } from 'vuex/types/index.js';
+import { useStore } from 'vuex';
 
-const store = useStore();
+const store = useStore(); 
 </script>
 
 <template>
     <div class="summary">
         <h3>Summary</h3>
-
-        <p>{{store.getters.targetPosition}}</p>
+        <p>Position: {{store.getters.targetPosition}}</p>
+        <p>Experience: {{store.getters.experience}}</p>
     </div>
 </template>
 
@@ -22,5 +22,6 @@ const store = useStore();
     padding: 1em;
     border-bottom-left-radius: 4px;
     border-bottom-right-radius: 4px;
+    max-width: 300px;
 }
 </style>
