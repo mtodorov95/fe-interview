@@ -1,5 +1,5 @@
 <script setup lang="ts">
-import { ref } from 'vue';
+import { ref, watch } from 'vue';
 
 defineProps(
     {
@@ -10,8 +10,11 @@ defineProps(
     }
 )
 
+const emit = defineEmits(['select'])
+
 const selectedOptions = ref([])
 
+watch(selectedOptions, (value) => emit('select', value));
 </script>
 
 <template>
@@ -31,5 +34,6 @@ const selectedOptions = ref([])
     gap: 10px;
     margin-top: 1em;
     margin-bottom: 1em;
+    text-align: left;
 }
 </style>

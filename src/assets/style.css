@@ -60,6 +60,10 @@ button:focus-visible {
   outline: 4px auto -webkit-focus-ring-color;
 }
 
+hr {
+    color: var(--color-secondary);
+}
+
 .card {
   padding: 2em;
   background-color: var(--color-white);

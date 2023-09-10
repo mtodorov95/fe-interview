@@ -4,6 +4,8 @@ const store = createStore({
     state: {
         targetPosition: null,
         experience: null,
+        framework: null,
+        redFlags: []
     },
     getters: {
         targetPosition(state) {
@@ -11,6 +13,12 @@ const store = createStore({
         },
         experience(state) {
             return state.experience
+        },
+        redFlags(state) {
+            return state.redFlags
+        },
+        framework(state) {
+            return state.framework
         },
     },
     mutations: {
@@ -20,6 +28,12 @@ const store = createStore({
         setTargetExperience(state, payload) {
             state.experience = payload;
         },
+        setRedFlags(state, payload) {
+            state.redFlags = payload;
+        },
+        setFramework(state, payload) {
+            state.framework = payload;
+        },
     },
     actions: {
         setTargetPosition(context, payload) {
@@ -27,6 +41,12 @@ const store = createStore({
         },
         setTargetExperience(context, payload) {
             context.commit('setTargetExperience', payload)
+        },
+        setRedFlags(context, payload) {
+            context.commit('setRedFlags', payload)
+        },
+        setFramework(context, payload) {
+            context.commit('setFramework', payload)
         },
     }
 })

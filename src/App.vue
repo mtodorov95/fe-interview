@@ -6,8 +6,10 @@ import Summary from "./components/TheSummary.vue"
 import { useStore } from "vuex";
 import { ref } from "vue";
 
+const STEPS = 7;
+
 const store = useStore();
-const step = ref(4);
+const step = ref(1);
 
 const setPosition = (position: string) => {
     store.dispatch('setTargetPosition', position)
@@ -17,15 +19,28 @@ const setExperience = (exp: string) => {
     store.dispatch('setTargetExperience', exp)
     incrementStep();
 }
+const setRedFlags = (flags: string[]) => {
+    store.dispatch('setRedFlags', flags)
+    incrementStep();
+}
+const setFramework = (framework: string) => {
+    store.dispatch('setFramework', framework)
+    incrementStep();
+}
 
 const finishSection = () => incrementStep();
 
-//const incrementStep = () => step.value += 1;
-const incrementStep = () => {};
+const incrementStep = () => {
+    if (step.value != STEPS) {
+        step.value += 1;
+    } else {
+        //show summary?
+    }
+}
+//const incrementStep = () => { };
 </script>
 
 <template>
-    <h1 class="title">FE Interview</h1>
     <Summary />
 
     <PillContainer v-if="step == 1" @select="(selected: string) => setPosition(selected)" header="Target position"
@@ -44,8 +59,34 @@ const incrementStep = () => {};
             <li>How did you plan the work?</li>
             <li>How did you ensure what you built works?</li>
         </ul>
-        <MultipleChoice @select="(selected: string) => setExperience(selected)" header="Red Flags"
-            :options="['None', '1-3 yrs', '3-5 yrs', '> 5 yrs']" />
+        <hr>
+        <MultipleChoice @select="(selected: string[]) => setRedFlags(selected)" header="Red Flags"
+            :options="['Can not answer', 'Narrow responsibilities', 'Non-agile/top-down environment']" />
+    </SectionCard>
+    <SectionCard v-if="step == 5" @done="finishSection()" title="Simple code snipet"
+        description="Write code to sum numbers in array, e.g. sum([1, 2, 3]) -> 6" :time="1">
+        <p>Possible answer: <code>const sum = arr => arr.reduce((sum, x) => sum + x, 0)</code></p>
+        <hr>
+        <p>Follow ups:</p>
+        <ul>
+            <li>let vs const?</li>
+            <li>function vs arrow function?</li>
+        </ul>
+    </SectionCard>
+    <PillContainer v-if="step == 6" @select="(selected: string) => setFramework(selected)" header="Framework of choice"
+        :options="['Vue', 'React', 'Angular']" />
+    <SectionCard v-if="step == 7" @done="finishSection()" title="Login Form"
+        :description="'Build a login form in ' + store.getters.framework" :time="1">
+        <p>Start with just the basic layout</p>
+        <hr>
+        <p>Follow ups:</p>
+        <ul>
+            <li>Style it with CSS</li>
+            <li>Display errors on bad credentials</li>
+            <li>Add browser autocomplete</li>
+            <li>Show/hide password button</li>
+            <li>Prevent multiple submissions</li>
+        </ul>
     </SectionCard>
 </template>
 
