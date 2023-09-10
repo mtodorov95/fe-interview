@@ -2,6 +2,8 @@
 import { computed } from '@vue/reactivity';
 import { onMounted, ref } from 'vue';
 
+const emit = defineEmits(['done']);
+
 
 const props = defineProps(
     { title: String, description: { type: String, required: false }, time: { type: Number, required: true } }
@@ -15,6 +17,7 @@ onMounted(() => {
 
         if (timePassed.value >= props.time * 60) {
             clear();
+            emit('done');
         }
     }, 1000)
 });
@@ -24,7 +27,7 @@ const progress = computed(() => (timePassed.value / (props.time * 60)) * 100);
 </script>
 
 <template>
-    <div class="card">
+    <div class="card section">
         <h2>{{ title }}</h2>
         <p class="description">{{ description }}</p>
         <slot></slot>
@@ -33,6 +36,9 @@ const progress = computed(() => (timePassed.value / (props.time * 60)) * 100);
 </template>
 
 <style scoped>
+.section {
+    max-width: 600px;
+}
 .timer {
     max-width: 100%;
     height: 15px;

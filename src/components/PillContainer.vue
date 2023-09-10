@@ -1,6 +1,6 @@
 <script setup lang="ts">
 
-defineProps<{ options: string[], header: string }>()
+    defineProps<{ options: string[], header: string }>()
     
 </script>
 
