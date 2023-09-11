@@ -6,24 +6,26 @@ const emit = defineEmits(['done']);
 
 
 const props = defineProps(
-    { title: String, description: { type: String, required: false }, time: { type: Number, required: true } }
+    { title: String, description: { type: String, required: false }, time: { type: Number, required: false } }
 )
 
 const timePassed = ref(0);
 let interval: number;
 onMounted(() => {
-    interval = setInterval(() => {
-        timePassed.value += 1;
+    if (props.time) {
+        interval = setInterval(() => {
+            timePassed.value += 1;
 
-        if (timePassed.value >= props.time * 60) {
-            clear();
-            emit('done');
-        }
-    }, 1000)
+            if (timePassed.value >= props.time! * 60) {
+                clear();
+                emit('done');
+            }
+        }, 1000)
+    }
 });
 
 const clear = () => clearInterval(interval);
-const progress = computed(() => (timePassed.value / (props.time * 60)) * 100);
+const progress = computed(() => (timePassed.value / (props.time! * 60)) * 100);
 </script>
 
 <template>
@@ -31,7 +33,7 @@ const progress = computed(() => (timePassed.value / (props.time * 60)) * 100);
         <h2>{{ title }}</h2>
         <p class="description">{{ description }}</p>
         <slot></slot>
-        <div :style="{ 'width': progress + '%' }" class="timer" :class="progress >= 90 ? 'warn' : ''"></div>
+        <div v-if="props.time" :style="{ 'width': progress + '%' }" class="timer" :class="progress >= 90 ? 'warn' : ''"></div>
     </div>
 </template>
 
@@ -39,6 +41,7 @@ const progress = computed(() => (timePassed.value / (props.time * 60)) * 100);
 .section {
     max-width: 600px;
 }
+
 .timer {
     max-width: 100%;
     height: 15px;

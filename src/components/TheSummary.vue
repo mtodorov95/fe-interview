@@ -1,11 +1,13 @@
 <script setup lang="ts">
 import { useStore } from 'vuex';
 
+defineProps<{inFocus: boolean}>()
+
 const store = useStore(); 
 </script>
 
 <template>
-    <div class="summary">
+    <div class="summary" :class="inFocus ? 'focus' : ''">
         <h3>Summary</h3>
         <p v-if="store.getters.targetPosition">Position: {{ store.getters.targetPosition }}</p>
         <p v-if="store.getters.experience">Experience: {{ store.getters.experience }}</p>
@@ -15,10 +17,10 @@ const store = useStore();
                 <li v-for="flag in store.getters.redFlags" :key="flag">{{ flag }}</li>
             </ul>
         </div>
-        <div v-if="true">
+        <div v-if="store.getters.codeRedFlags.length">
             <p>Code Red Flags:</p>
             <ul>
-                <li v-for="flag in ['add code red flags']" :key="flag">{{ flag }}</li>
+                <li v-for="flag in store.getters.codeRedFlags" :key="flag">{{ flag }}</li>
             </ul>
         </div>
     </div>
@@ -42,5 +44,11 @@ const store = useStore();
 h3 {
     width: 100%;
     text-align: center;
+}
+
+.focus {
+    position: inherit;
+    border-radius: 4px;
+    max-width: 100%;
 }
 </style>
