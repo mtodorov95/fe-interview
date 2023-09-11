@@ -1,6 +1,6 @@
 <script setup lang="ts">
-import PillContainer from "./components/PillContainer.vue"
-import SectionCard from "./components/SectionCard.vue"
+import PillContainer from "./PillContainer.vue"
+import SectionCard from "./SectionCard.vue"
 import { useStore } from "vuex";
 import { ref } from "vue";
 
