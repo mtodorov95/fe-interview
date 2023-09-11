@@ -1,6 +1,7 @@
 import { createStore } from 'vuex'
 
 interface State {
+    name: string
     targetPosition: string | null,
     experience: string | null,
     framework: string | null,
@@ -11,14 +12,18 @@ interface State {
 
 const store = createStore({
     state: <State>{
+        name: '',
         targetPosition: null,
         experience: null,
         framework: null,
         redFlags: [],
         codeRedFlags: [],
-        duration: { 3: 5, 4: 10, 5: 15, 7: 35 }
+        duration: { 1: 5, 2: 10, 3: 15, 5: 35 }
     },
     getters: {
+        name(state: State) {
+            return state.name
+        },
         targetPosition(state: State) {
             return state.targetPosition
         },
@@ -39,6 +44,9 @@ const store = createStore({
         },
     },
     mutations: {
+        setName(state: State, payload: string) {
+            state.name = payload;
+        },
         setTargetPosition(state: State, payload: string) {
             state.targetPosition = payload;
         },
@@ -58,6 +66,9 @@ const store = createStore({
         },
     },
     actions: {
+        setName(context, payload: string) {
+            context.commit('setName', payload)
+        },
         setTargetPosition(context, payload: string) {
             context.commit('setTargetPosition', payload)
         },

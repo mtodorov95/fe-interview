@@ -9,6 +9,7 @@ const store = useStore();
 <template>
     <div class="summary" :class="inFocus ? 'focus' : ''">
         <h3>Summary</h3>
+        <p v-if="store.getters.name.length">Name: {{ store.getters.name }}</p>
         <p v-if="store.getters.targetPosition">Position: {{ store.getters.targetPosition }}</p>
         <p v-if="store.getters.experience">Experience: {{ store.getters.experience }}</p>
         <div v-if="store.getters.redFlags.length">

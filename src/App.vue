@@ -5,14 +5,14 @@ import InterviewPart from "./components/InterviewPart.vue"
 import Summary from "./components/TheSummary.vue"
 
 const showSummary = ref(false);
-const isConfiguring = ref(false);
+const isConfiguring = ref(true);
 
 </script>
 
 <template>
     <Summary :in-focus="showSummary"/>
 
-    <ConfigurationPart v-if="isConfiguring"/>
+    <ConfigurationPart v-if="isConfiguring" @done="isConfiguring = false"/>
 
     <InterviewPart v-else @done="showSummary = true"/>
 </template>
