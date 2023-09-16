@@ -41,9 +41,10 @@ const incrementStep = () => {
 
 <template>
     <SectionCard v-if="step == 1" @done="finishSection()" title="Introduction"
-        description="Casual chat + brief introduction of me, the product and the team" :time="getDuration(TIMED_STEPS.INTRODUCTION)" />
-    <SectionCard v-if="step == 2" @done="finishSection()" title="About you" description="Tell me about your experience"
+        description="Casual chat + brief introduction of you, the product and the team" :time="getDuration(TIMED_STEPS.INTRODUCTION)" />
+    <SectionCard v-if="step == 2" @done="finishSection()" title="About you" description="Introduction of the candidate and their experience"
         :time="getDuration(TIMED_STEPS.ABOUT_YOU)">
+        <p>Questions:</p>
         <ul>
             <li>What were your responsibilities?</li>
             <li>What was the team structure?</li>

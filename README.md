@@ -4,6 +4,8 @@
 - Pull random JS and framework related questions and their answers
 - Configurable interview duration
 - Fix all the styling
+- Add interviewer notes
+- Add scoring system?
 
 ## Project Setup
 

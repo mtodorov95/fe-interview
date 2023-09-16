@@ -31,7 +31,7 @@ const store = useStore();
 .summary {
     position: absolute;
     top: 0;
-    left: 50px;
+    left: 25px;
     background-color: var(--color-primary);
     color: var(--color-white);
     padding: 1em;
@@ -51,5 +51,6 @@ h3 {
     position: inherit;
     border-radius: 4px;
     max-width: 100%;
+    padding: 1em 2em;
 }
 </style>
