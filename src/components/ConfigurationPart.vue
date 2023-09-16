@@ -26,10 +26,9 @@ const setExperience = (exp: string) => {
 }
 
 const incrementStep = () => {
-    if (step.value != STEPS) {
-        step.value += 1;
-    } else {
-        emits('done')
+    step.value += 1;
+    if (step.value > STEPS) {
+        emits('done');
     }
 }
 </script>

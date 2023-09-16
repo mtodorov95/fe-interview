@@ -1,4 +1,5 @@
 import { createStore } from 'vuex'
+import TIMED_STEPS from '@/enums/steps'
 
 interface State {
     name: string
@@ -6,7 +7,7 @@ interface State {
     experience: string | null,
     framework: string | null,
     redFlags: Array<string>,
-    codeRedFlags: Array<string>,
+    codeRedFlags: Array<Array<string>>,
     duration: object
 }
 
@@ -18,7 +19,7 @@ const store = createStore({
         framework: null,
         redFlags: [],
         codeRedFlags: [],
-        duration: { 1: 5, 2: 10, 3: 15, 5: 35 }
+        duration: { [TIMED_STEPS.INTRODUCTION]: 5, [TIMED_STEPS.ABOUT_YOU]: 10, [TIMED_STEPS.CODE_SNIPET]: 15, [TIMED_STEPS.FORM]: 35 }
     },
     getters: {
         name(state: State) {
@@ -34,7 +35,7 @@ const store = createStore({
             return state.redFlags
         },
         codeRedFlags(state: State) {
-            return state.codeRedFlags
+            return state.codeRedFlags.flat()
         },
         framework(state: State) {
             return state.framework
@@ -56,8 +57,10 @@ const store = createStore({
         setRedFlags(state: State, payload: string[]) {
             state.redFlags = payload;
         },
-        setCodeRedFlags(state: State, payload: string[]) {
-            state.codeRedFlags = payload;
+        setCodeRedFlags(state: State, payload: object) {
+            const idx: number = payload['idx']
+            const flags: string[] = payload['flags']
+            state.codeRedFlags[idx] = flags;
         },
         setFramework(state: State, payload: string) {
             state.framework = payload;
@@ -76,7 +79,7 @@ const store = createStore({
         setRedFlags(context, payload: string[]) {
             context.commit('setRedFlags', payload)
         },
-        setCodeRedFlags(context, payload: string[]) {
+        setCodeRedFlags(context, payload: object) {
             context.commit('setCodeRedFlags', payload)
         },
         setFramework(context, payload: string) {
