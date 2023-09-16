@@ -2,7 +2,8 @@
 
 ## TODO:
 - Pull random JS and framework related questions and their answers
-- Add option to pause section timer
+- Configurable interview duration
+- Fix code red flags
 - Fix all the styling
 
 ## Project Setup

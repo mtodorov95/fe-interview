@@ -15,8 +15,12 @@ const getDuration = (step:number) => store.getters.duration[step];
 
 const setRedFlags = (flags: string[]) => {
     store.dispatch('setRedFlags', flags)
-    incrementStep();
 }
+
+const setCodeRedFlags = (flags: string[]) => {
+    store.dispatch('setCodeRedFlags', flags)
+}
+
 const setFramework = (framework: string) => {
     store.dispatch('setFramework', framework)
     incrementStep();
@@ -57,6 +61,9 @@ const incrementStep = () => {
             <li>let vs const?</li>
             <li>function vs arrow function?</li>
         </ul>
+        <hr>
+        <MultipleChoice @select="(selected: string[]) => setCodeRedFlags(selected)" header="Red Flags"
+            :options="['Bad fundamentals', 'Non-idiomatic code']" />
     </SectionCard>
     <PillContainer v-if="step == 4" @select="(selected: string) => setFramework(selected)" header="Framework of choice"
         :options="['Vue', 'React', 'Angular']" />
@@ -72,6 +79,9 @@ const incrementStep = () => {
             <li>Show/hide password button</li>
             <li>Prevent multiple submissions</li>
         </ul>
+        <hr>
+        <MultipleChoice @select="(selected: string[]) => setCodeRedFlags(selected)" header="Red Flags"
+            :options="['No HTML knowledge', 'Lacks framework knowledge']" />
     </SectionCard>
     <SectionCard v-if="step == 6" @done="finishSection()" title="Reverse interview"
         description="Answer questions that the candidate may have.">

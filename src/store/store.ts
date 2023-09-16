@@ -56,10 +56,8 @@ const store = createStore({
         setRedFlags(state: State, payload: string[]) {
             state.redFlags = payload;
         },
-        setCodeRedFlags(state: State, payload: string) {
-            if (state.codeRedFlags.indexOf(payload) == -1) {
-                state.codeRedFlags.push(payload);
-            }
+        setCodeRedFlags(state: State, payload: string[]) {
+            state.codeRedFlags = payload;
         },
         setFramework(state: State, payload: string) {
             state.framework = payload;
@@ -78,7 +76,7 @@ const store = createStore({
         setRedFlags(context, payload: string[]) {
             context.commit('setRedFlags', payload)
         },
-        setCodeRedFlags(context, payload: string) {
+        setCodeRedFlags(context, payload: string[]) {
             context.commit('setCodeRedFlags', payload)
         },
         setFramework(context, payload: string) {
