@@ -52,6 +52,8 @@ button {
   background-color: var(--color-white);
   cursor: pointer;
   transition: border-color 0.25s;
+  display: block;
+  margin: 0 auto;
 }
 button:hover {
   border-color: var(--color-primary);
@@ -63,10 +65,16 @@ button:focus-visible {
 
 hr {
     color: var(--color-secondary);
+    width: 100%;
 }
 
 ul {
     text-align: left;
+}
+
+input {
+    margin-top: 0.5em;
+    margin-bottom: 0.5em;
 }
 
 .card {
@@ -79,6 +87,15 @@ ul {
   padding: 0.5em;
   background-color: var(--color-white);
   border-radius: 4px;
+}
+.pill-primary {
+  background-color: var(--color-primary);
+  color: var(--color-white);
+}
+
+.flex-column {
+    display: flex;
+    flex-direction: column;
 }
 
 #app {

@@ -35,9 +35,8 @@ const incrementStep = () => {
 </script>
 
 <template>
-    <SectionCard v-if="step == 1" title="Candidate name">
+    <SectionCard v-if="step == 1" title="Candidate name" @done="setName()">
         <input v-model="name" type="text" name="name" id="name">
-        <button @click="setName()" class="pill">Next</button>
     </SectionCard>
     <PillContainer v-if="step == 2" @select="(selected: string) => setPosition(selected)" header="Target position"
         :options="['Junior', 'Advanced', 'Senior']" />
