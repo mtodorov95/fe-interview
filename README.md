@@ -1,11 +1,13 @@
 # fe-interview
 
 ## TODO:
-- Pull random JS and framework related questions and their answers
+- Add remaining framework questions
+- Fix questions formating
 - Configurable interview duration
 - Fix all the styling
 - Add interviewer notes
 - Add scoring system?
+- Tests
 
 ## Project Setup
 

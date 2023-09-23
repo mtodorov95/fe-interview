@@ -1,11 +1,14 @@
 import { createStore } from 'vuex'
 import TIMED_STEPS from '@/enums/steps'
+import type { Question } from '@/data/interfaces'
+import { vueQuestions } from '@/data/vue'
 
 interface State {
     name: string
     targetPosition: string | null,
     experience: string | null,
     framework: string | null,
+    questions: Question[],
     redFlags: Array<string>,
     codeRedFlags: Array<Array<string>>,
     duration: object
@@ -17,9 +20,10 @@ const store = createStore({
         targetPosition: null,
         experience: null,
         framework: null,
+        questions: [],
         redFlags: [],
         codeRedFlags: [],
-        duration: { [TIMED_STEPS.INTRODUCTION]: 5, [TIMED_STEPS.ABOUT_YOU]: 10, [TIMED_STEPS.CODE_SNIPET]: 15, [TIMED_STEPS.FORM]: 35 }
+        duration: { [TIMED_STEPS.INTRODUCTION]: 5, [TIMED_STEPS.ABOUT_YOU]: 10, [TIMED_STEPS.CODE_SNIPET]: 15, [TIMED_STEPS.FRAMEWORK_QUESTION]: 5, [TIMED_STEPS.FORM]: 35 }
     },
     getters: {
         name(state: State) {
@@ -39,6 +43,9 @@ const store = createStore({
         },
         framework(state: State) {
             return state.framework
+        },
+        questions(state: State) {
+            return state.questions
         },
         duration(state: State) {
             return state.duration
@@ -65,6 +72,19 @@ const store = createStore({
         setFramework(state: State, payload: string) {
             state.framework = payload;
         },
+        setQuestions(state: State, payload: string) {
+            switch(payload) {
+                case "Vue":
+                    state.questions = vueQuestions;
+                    break;
+                case "React":
+                    state.questions = vueQuestions;
+                    break;
+                case "Angular":
+                    state.questions = vueQuestions;
+                    break;
+            }
+        },
     },
     actions: {
         setName(context, payload: string) {
@@ -84,6 +104,7 @@ const store = createStore({
         },
         setFramework(context, payload: string) {
             context.commit('setFramework', payload)
+            context.commit('setQuestions', payload)
         },
     }
 })
