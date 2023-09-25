@@ -36,11 +36,13 @@ const incrementStep = () => {
 <template>
     <SectionCard v-if="step == 1" title="Configure duration"
         description="Set your own interview duration, or use the default values?" @done="incrementStep()">
-        <p>By default the time is 65 min broken down into: <br>5 min for interviewer introduction; <br>10 min for candidate
-            introduction; <br>15 min for writing a simple code snipet + follow up questions; <br>35 min for creating a login
+        <p>By default the time is 75 min broken down into: <br>5 min for interviewer introduction; <br>10 min for candidate
+            introduction; <br>15 min for writing a simple code snipet + follow up questions;
+            <br>10 min for framework questions
+            <br>35 min for creating a login
             form in the framework of choice + follow up tasks.</p>
         <p>All timed steps will have a play-pause button and a progress bar, as well as a 'Next' button if you want to end the step early.<br>All other steps require input to proceed</p>
-        <button @click="$emit('done')" class="pill">Configure</button>
+        <button class="pill">Configure(WIP)</button>
     </SectionCard>
     <SectionCard v-if="step == 2" title="Candidate name" @done="setName()">
         <input v-model="name" type="text" name="name" id="name">

@@ -1,8 +1,6 @@
 # fe-interview
 
 ## TODO:
-- Add remaining framework questions
-- Fix questions formating
 - Configurable interview duration
 - Fix all the styling
 - Add interviewer notes

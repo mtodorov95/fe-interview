@@ -2,6 +2,8 @@ import { createStore } from 'vuex'
 import TIMED_STEPS from '@/enums/steps'
 import type { Question } from '@/data/interfaces'
 import { vueQuestions } from '@/data/vue'
+import { reactQuestions } from '@/data/react'
+import { angularQuestions } from '@/data/angular'
 
 interface State {
     name: string
@@ -23,7 +25,7 @@ const store = createStore({
         questions: [],
         redFlags: [],
         codeRedFlags: [],
-        duration: { [TIMED_STEPS.INTRODUCTION]: 5, [TIMED_STEPS.ABOUT_YOU]: 10, [TIMED_STEPS.CODE_SNIPET]: 15, [TIMED_STEPS.FRAMEWORK_QUESTION]: 5, [TIMED_STEPS.FORM]: 35 }
+        duration: { [TIMED_STEPS.INTRODUCTION]: 5, [TIMED_STEPS.ABOUT_YOU]: 10, [TIMED_STEPS.CODE_SNIPET]: 15, [TIMED_STEPS.FRAMEWORK_QUESTION]: 10, [TIMED_STEPS.FORM]: 35 }
     },
     getters: {
         name(state: State) {
@@ -78,10 +80,10 @@ const store = createStore({
                     state.questions = vueQuestions;
                     break;
                 case "React":
-                    state.questions = vueQuestions;
+                    state.questions = reactQuestions;
                     break;
                 case "Angular":
-                    state.questions = vueQuestions;
+                    state.questions = angularQuestions;
                     break;
             }
         },

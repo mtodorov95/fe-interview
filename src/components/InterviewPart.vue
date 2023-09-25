@@ -8,7 +8,7 @@ import { redFlagsOptions, jsRedFlagsOption, frameworkRedFlagsOptions } from '@/d
 import { useStore } from "vuex";
 import { ref } from "vue";
 
-const STEPS = 6;
+const STEPS = 7;
 
 const emits = defineEmits(['done']);
 const store = useStore();
@@ -60,10 +60,10 @@ const incrementStep = () => {
 
 <template>
     <SectionCard v-if="step == 1" @done="finishSection()" title="Introduction"
-        description="Casual chat + brief introduction of you, the product and the team"
+        description="Casual chat + brief introduction of you (the interviewer), the product and the team"
         :time="getDuration(TIMED_STEPS.INTRODUCTION)" />
     <SectionCard v-if="step == 2" @done="finishSection()" title="About you"
-        description="Introduction of the candidate and their experience" :time="getDuration(TIMED_STEPS.ABOUT_YOU)">
+        description="Introduction of the candidate and their experience until now" :time="getDuration(TIMED_STEPS.ABOUT_YOU)">
         <p>Questions:</p>
         <ul>
             <li>What were your responsibilities?</li>
@@ -86,6 +86,7 @@ const incrementStep = () => {
         <ul>
             <li>let vs const?</li>
             <li>function vs arrow function?</li>
+            <li><a href="https://dev.to/macmacky/70-javascript-interview-questions-5gfi" target="_blank">More questions (not yet in the app)</a></li>
         </ul>
         <hr>
         <MultipleChoice @select="(selected: string[]) => setCodeRedFlags(0, selected)" header="Red Flags"
@@ -96,10 +97,10 @@ const incrementStep = () => {
     <SectionCard v-if="step == 5" @done="finishSection()" title="Framework questions"
         :time="getDuration(TIMED_STEPS.FRAMEWORK_QUESTION)">
         <p>{{ store.getters.questions[roll].question }}</p>
-        <CodeBlock v-if="store.getters.questions[roll].code" :code="store.getters.questions[roll].code" />
+        <p v-if="store.getters.questions[roll].answer">{{ store.getters.questions[roll].answer }}</p>
         <hr>
-        <p v-if="store.getters.questions[roll].answer">Answer: {{ store.getters.questions[roll].answer }}</p>
-        <button @click="reRoll()" class="pill">Reroll</button>
+        <CodeBlock v-if="store.getters.questions[roll].code" :code="store.getters.questions[roll].code" />
+        <button @click="reRoll()" class="pill">New Question</button>
     </SectionCard>
     <SectionCard v-if="step == 6" @done="finishSection()" title="Login Form"
         :description="'Build a login form in ' + store.getters.framework" :time="getDuration(TIMED_STEPS.FORM)">

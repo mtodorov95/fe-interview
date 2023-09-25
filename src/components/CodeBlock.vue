@@ -1,13 +1,13 @@
 <script setup lang="ts">
 
-defineProps<{code: string}>()
+defineProps<{ code: string }>()
 
 </script>
 
 <template>
     <div class="code-block">
         <code>
-            <p v-for="line in code.split('\n')" :key="line">{{line}}</p>
+            <p v-for="line in code.split('\n')" :key="line">{{ line }}</p>
         </code>
     </div>
 </template>
@@ -19,5 +19,6 @@ defineProps<{code: string}>()
     border-radius: 4px;
     color: var(--color-white);
     text-align: left;
+    margin-bottom: 0.5em;
 }
 </style>
